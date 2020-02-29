@@ -13,7 +13,8 @@ public class Main : MonoBehaviour
     public static Main instance;
 
     public UI ui;
-
+    public GameCamera gameCamera;
+    
     GameState state;
 
     void Awake()
@@ -34,6 +35,7 @@ public class Main : MonoBehaviour
         if (state == GameState.WIN)
             return;
 
+        gameCamera.mode = CameraMode.WIN;
         state = GameState.WIN;
         ui.Win();
     }

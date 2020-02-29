@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerCharacter : MonoBehaviour
 {
@@ -8,13 +7,12 @@ public class PlayerCharacter : MonoBehaviour
     void Update()
     {
         if (Input.GetMouseButton(0))
-        {
             transform.position += transform.forward * (speed * Time.deltaTime);
-        }
     }
 
     void OnTriggerEnter(Collider other)
     {
-        Main.instance.Win();
+        if (other.CompareTag("Finish"))
+            Main.instance.Win();
     }
 }
