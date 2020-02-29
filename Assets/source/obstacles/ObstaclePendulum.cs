@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ObstaclePendulum : MonoBehaviour
+public class ObstaclePendulum : Obstacle
 {
     public float apm = 2f;
     public float speed = 1f;
@@ -14,14 +14,18 @@ public class ObstaclePendulum : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         origin = transform.position;
 
-        if (flip)
-            transform.position = origin + Vector3.right * apm;
-        else
-            transform.position = origin + Vector3.left * apm;
+        transform.position = origin + Vector3.left * apm;
     }
 
     void FixedUpdate()
     {
-        rigidbody.MovePosition(origin + Vector3.right * (Mathf.Sin(Time.time * speed) * apm));
+        rigidbody.MovePosition(origin + transform.right * (GetProgress() * apm));
+    }
+
+    float GetProgress()
+    {
+        if (flip)
+            return Mathf.Cos(Time.time * speed);
+        return Mathf.Sin(Time.time * speed);
     }
 }
